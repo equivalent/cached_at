@@ -1,8 +1,10 @@
 require "cached_at/version"
+require "cached_at/model_last_cached_at"
 
 module CachedAt
   def self.included(klass)
     klass.instance_eval do
+      extend ModelLastCachedAt::ClassMethods
       before_save :_set_cached_at
     end
   end
