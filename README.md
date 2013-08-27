@@ -23,6 +23,25 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+
+Gem provides method `last_cached_at` that you can call on model. 
+This will get the maximum value of `cached_at` field and store it in an
+class instance_variable so that it don't have to trigger SQL call each
+time you call it.
+
+    User.last_cached_at
+    # SELECT MAX(`users`.`cached_at`) AS max_id FROM `users` 
+    #=> => 2013-08-08 08:49:38 UTC
+    sleep 2
+    User.last_cached_at
+    #=> => 2013-08-08 08:49:38 UTC
+
+If you need to fetch the fresh value, just pass `true` as an argument
+
+    User.last_cached_at(true)
+    # SELECT MAX(`users`.`cached_at`) AS max_id FROM `users` 
+    #=> => 2013-08-08 08:49:38 UTC
+
 ## Contributing
 
 1. Fork it
