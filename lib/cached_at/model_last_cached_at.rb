@@ -1,6 +1,6 @@
 module ModelLastCachedAt
   module ClassMethods
-    def last_cached(reload=false)
+    def last_cached_at(reload=false)
       last_cached_at = instance_variable_get(base_last_cached_at_var_name)
       return last_cached_at if last_cached_at and !reload
       instance_variable_set(base_last_cached_at_var_name, last_base_cached_at_change)
@@ -8,7 +8,7 @@ module ModelLastCachedAt
 
     protected
     def base_last_cached_at_var_name
-      "@#{self.model_name.underscore}_last_cached"
+      "@#{self.model_name.underscore}_last_cached_at"
     end
 
     def last_base_cached_at_change
