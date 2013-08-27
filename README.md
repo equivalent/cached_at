@@ -42,6 +42,10 @@ If you need to fetch the fresh value, just pass `true` as an argument
     # SELECT MAX(`users`.`cached_at`) AS max_id FROM `users` 
     #=> => 2013-08-08 08:49:38 UTC
 
+This may be helpful as a parameter for caching
+
+    Rails.cache.fetch(User.last_cached_at, 'accessible_user_ids'){ User.accessible.puck(:id) }
+
 ## Contributing
 
 1. Fork it
